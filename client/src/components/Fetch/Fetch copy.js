@@ -70,12 +70,13 @@ class Fetch extends Component{
                     this.setState({errorMsg: 'Error retrieving data'})
                 })
     }
-      UpdateProduct(event)
+    /*  UpdateProduct(id)
     {
-       //alert("edit");
-       return <Update/>;
-      
-    } 
+        render()
+        {<>
+               <Add/></>
+        }
+    } */
 
     render(){
         const {products,errorMsg} = this.state
@@ -111,7 +112,7 @@ class Fetch extends Component{
           </TableRow>
         </TableHead>
         <TableBody>
-      
+        <Router>
 			 {
             products.length ?
             products.map(products => 
@@ -119,11 +120,12 @@ class Fetch extends Component{
               <StyledTableCell align="right"> {products.color}</StyledTableCell>
               <StyledTableCell align="right">{products.description}</StyledTableCell>
               <StyledTableCell align="right"> <Button size="small" color="primary" onClick={() => this.deleteProduct(products._id)}> Delete</Button></StyledTableCell>
-           <StyledTableCell align="right">
-        <Link className="edit-link" to={"/Update/" + products._id}>Edit</Link> </StyledTableCell>  
-      </StyledTableRow>) : null
+           {/*   <StyledTableCell align="right"> <Button size="small" color="primary"> Edit</Button></StyledTableCell> */}
+        <StyledTableCell align="right">   <Link to={"/update/" +products.id}>Update</Link> </StyledTableCell></StyledTableRow>) : null
             
         }
+        <Route path="/update" component={Update} />
+        </Router>
         </TableBody>
       </Table>
     </TableContainer>
@@ -132,14 +134,11 @@ class Fetch extends Component{
         {errorMsg ? <div>{errorMsg}</div> :null
 
         }
-      
         </div>
-
-
-
-         
     );
     }
 }
 
 export default Fetch;
+
+<input type="text" name="name" value={name} onChange={this.changeHandler}/>
